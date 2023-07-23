@@ -11,19 +11,18 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-
+@Validated
 public class ProfileController {
+
     @GetMapping("/profiles")
     public List<Profile> processData(
-            @Validated
             @RequestParam String name,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateOfBirth,
             @RequestParam int age) {
 
-        return List.of(new Profile("tanaka", (LocalDate.of(1989,01,01)),34),
+        return List.of(new Profile("", (LocalDate.of(1989,01,01)),34),
                        new Profile("yamada", (LocalDate.of(1979,01,01)),44));
     }
-
 
     @PostMapping("/profiles")
     public ResponseEntity<ProfileCreateResponse> create(@RequestBody ProfileCreateForm form){

@@ -9,10 +9,12 @@ public class Profile {
     //入力必須、長さ20桁まで
     @NotEmpty(message = "Please provide a name")
     @Length(max = 20)
+    @NotBlank(message = "Please provide a name")
     private String name;
 
     //入力必須
     @NotEmpty(message = "Please provide a dateOfBirth")
+    @NotBlank(message = "Please provide a name")
     private  LocalDate dateOfBirth;
 
     //対象年齢：20~65歳
@@ -35,6 +37,7 @@ public class Profile {
     public int getAge() {
         return age;
     }
+
 }
 
 
