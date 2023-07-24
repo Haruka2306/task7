@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import jakarta.validation.constraints.*;
 
 import java.net.URI;
 import java.time.LocalDate;
@@ -16,7 +17,7 @@ public class ProfileController {
 
     @GetMapping("/profiles")
     public List<Profile> processData(
-            @RequestParam String name,
+            @NotBlank @RequestParam String name,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateOfBirth,
             @RequestParam int age) {
 
