@@ -21,7 +21,7 @@ public class ProfileController {
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateOfBirth,
             @RequestParam int age) {
 
-        return List.of(new Profile("", (LocalDate.of(1989,01,01)),34),
+        return List.of(new Profile("tanaka", (LocalDate.of(1989,01,01)),34),
                        new Profile("yamada", (LocalDate.of(1979,01,01)),44));
     }
 
