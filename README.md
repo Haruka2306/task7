@@ -4,7 +4,7 @@
 * 名前、生年月日、年齢を受け取れるようにする
 * バリデーションについて調べてnameが空文字の場合はエラーとする
 
-#### GET
+### GET
 ![task7_GET](https://github.com/Haruka2306/task7/assets/137120436/6065cb3e-2e01-4393-a4b0-d0049b23caa8)
 
 ### POST
