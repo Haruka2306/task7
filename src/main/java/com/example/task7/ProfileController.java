@@ -1,6 +1,5 @@
 package com.example.task7;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +9,7 @@ import jakarta.validation.constraints.*;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 @Validated
@@ -18,17 +18,20 @@ public class ProfileController {
     @GetMapping("/profiles")
     public List<Profile> processData(
             @NotEmpty @RequestParam List<@NotBlank String> name,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateOfBirth,
-            @RequestParam int age) {
-
-        return List.of(new Profile("tanaka", (LocalDate.of(1989,01,01)),34),
-                       new Profile("yamada", (LocalDate.of(1979,01,01)),44));
+            @RequestParam List<LocalDate> dateOfBirth,
+            @RequestParam List<Integer> age) {
+        List<Profile> response = new ArrayList<>();
+        for (int i = 0; i < name.size(); i++) {
+            Profile profile = new Profile (name.get(i), dateOfBirth.get(i), age.get(i));
+            response.add(profile);
+        }
+        return response;
     }
 
     @PostMapping("/profiles")
     public ResponseEntity<ProfileCreateResponse> create(@RequestBody ProfileCreateForm form){
         URI url = UriComponentsBuilder.fromUriString("http://localhost:8080")
-                .path("/profiles")
+                .path("/profiles/{id}")
                 .build()
                 .toUri();
         return ResponseEntity.created(url).body(new ProfileCreateResponse("profile successfully created"));
@@ -36,10 +39,6 @@ public class ProfileController {
 
     @PatchMapping("/profiles/{id}")
     public ResponseEntity<ProfileUpdateResponse> create( @PathVariable int id, @RequestBody ProfileUpdateForm form){
-        URI uri = UriComponentsBuilder.fromUriString("http://localhost:8080")
-                .path("/profiles")
-                .build()
-                .toUri();
         return ResponseEntity.ok(new ProfileUpdateResponse("profile successfully updated"));
     }
 
