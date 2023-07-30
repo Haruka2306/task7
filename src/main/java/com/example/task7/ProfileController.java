@@ -17,7 +17,7 @@ public class ProfileController {
 
     @GetMapping("/profiles")
     public List<Profile> processData(
-            @NotBlank @RequestParam String name,
+            @NotEmpty @RequestParam List<@NotBlank String> name,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateOfBirth,
             @RequestParam int age) {
 
